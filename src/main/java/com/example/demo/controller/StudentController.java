@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class StudentController {
 
     @Autowired
-    private StudentService studentService;
+    private StudentS studentService;
 
     @PostMapping("/students")
     public Student addStudent(@RequestBody Student student) {
