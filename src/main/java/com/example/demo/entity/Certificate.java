@@ -11,10 +11,7 @@ public class Certificate {
     private Long id;
 
     @ManyToOne
-    private Student student;
-
-    @ManyToOne
-    private CertificateTemplate template;
+    private User user;   // ✅ USER (not Student)
 
     private LocalDate issuedDate;
     private String verificationCode;
@@ -27,42 +24,34 @@ public class Certificate {
         return id;
     }
 
-    public Student getStudent() {
-        return student;
+    public User getUser() {          
+        return user;
     }
-  
-    public void setStudent(Student student) {
-        this.student = student;
+
+    public void setUser(User user) { 
+        this.user = user;
     }
-  
-    public CertificateTemplate getTemplate() {
-        return template;
-    }
-  
-    public void setTemplate(CertificateTemplate template) {
-        this.template = template;
-    }
-  
+
     public LocalDate getIssuedDate() {
         return issuedDate;
     }
-  
+
     public void setIssuedDate(LocalDate issuedDate) {
         this.issuedDate = issuedDate;
     }
-  
+
     public String getVerificationCode() {
         return verificationCode;
     }
-  
+
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
     }
-  
+
     public String getQrCodeUrl() {
         return qrCodeUrl;
     }
-  
+
     public void setQrCodeUrl(String qrCodeUrl) {
         this.qrCodeUrl = qrCodeUrl;
     }
