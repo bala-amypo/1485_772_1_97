@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.example.demo.entity.Certificate;
@@ -34,7 +35,7 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public Certificate verifyCertificate(String verificationCode) {
+    public Optional<Certificate> verifyCertificate(String verificationCode) {
         return certificateRepo.findByVerificationCode(verificationCode);
     }
 }
