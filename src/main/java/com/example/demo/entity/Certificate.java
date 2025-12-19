@@ -11,7 +11,7 @@ public class Certificate {
     private Long id;
 
     @ManyToOne
-    private User user;   // ✅ USER (not Student)
+    private User user;  
 
     private LocalDate issuedDate;
     private String verificationCode;

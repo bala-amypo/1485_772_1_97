@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 import com.example.demo.entity.Student;
-import com.example.demo.service.StudentS;   // ✅ change import
+import com.example.demo.service.StudentS;   
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class StudentController {
 
     @Autowired
-    private StudentS studentService;   // ✅ change type
+    private StudentS studentService;  
 
     @PostMapping("/students")
     public Student addStudent(@RequestBody Student student) {
