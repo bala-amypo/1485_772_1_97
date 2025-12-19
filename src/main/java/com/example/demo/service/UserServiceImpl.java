@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements StudentService {
+public class StudentServiceImpl implements StudentService {
 
     private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public StudentServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
