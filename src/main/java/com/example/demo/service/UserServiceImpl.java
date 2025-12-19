@@ -11,7 +11,7 @@ public class UserServiceImpl implements StudentService {
 
     private final UserRepository userRepository;
 
-    public StudentServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
