@@ -1,25 +1,28 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import com.example.demo.entity.Student;
-import com.example.demo.service.StudentS;   
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.entity.Student;
+import com.example.demo.service.StudentService;
+
 @RestController
+@RequestMapping("/students")
 public class StudentController {
 
-    @Autowired
-    private StudentS studentService;  
+    private final StudentService studentService;
 
-    @PostMapping("/students")
-    public Student addStudent(@RequestBody Student student) {
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    @PostMapping("/add")
+    public Student add(@RequestBody Student student) {
         return studentService.addStudent(student);
     }
 
-    @GetMapping("/students")
-    public List<Student> getStudents() {
+    @GetMapping("/list")
+    public List<Student> list() {
         return studentService.getAllStudents();
     }
 }
