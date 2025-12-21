@@ -1,27 +1,33 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.User;
-import com.example.demo.repository.UserRepository;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.demo.entity.Student;
+import com.example.demo.repository.StudentRepository;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    private final UserRepository userRepository;
+    private final StudentRepository studentRepository;
 
-    public StudentServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public StudentServiceImpl(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public Student addStudent(Student student) {
+        return studentRepository.save(student);
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
+    }
+
+    @Override
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElse(null);
     }
 }

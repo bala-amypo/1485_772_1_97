@@ -2,40 +2,56 @@ package com.example.demo.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-import com.example.demo.entity.Certificate;
-import com.example.demo.repository.CertificateRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
 
 @Service
 public class CertificateServiceImpl implements CertificateService {
 
-    @Autowired
-    private CertificateRepository certificateRepo;
+    private final CertificateRepository certificateRepository;
+    private final StudentRepository studentRepository;
+    private final CertificateTemplateRepository templateRepository;
 
-    @Override
-    public Certificate generateCertificate(Certificate c) {
-
-        String verificationCode = UUID.randomUUID().toString();
-
-        c.setVerificationCode(verificationCode);
-        c.setIssuedDate(LocalDate.now());
-        c.setQrCodeUrl("http://localhost:8080/verify/" + verificationCode);
-
-        return certificateRepo.save(c);
+    public CertificateServiceImpl(CertificateRepository certificateRepository,
+                                  StudentRepository studentRepository,
+                                  CertificateTemplateRepository templateRepository) {
+        this.certificateRepository = certificateRepository;
+        this.studentRepository = studentRepository;
+        this.templateRepository = templateRepository;
     }
 
     @Override
-    public List<Certificate> getAllCertificates() {
-        return certificateRepo.findAll();
+    public Certificate generateCertificate(Long studentId, Long templateId) {
+        Student student = studentRepository.findById(studentId).orElse(null);
+        CertificateTemplate template = templateRepository.findById(templateId).orElse(null);
+
+        Certificate certificate = new Certificate(
+                student,
+                template,
+                LocalDate.now(),
+                UUID.randomUUID().toString(),
+                "QR_CODE_URL"
+        );
+        return certificateRepository.save(certificate);
     }
 
     @Override
-    public Optional<Certificate> verifyCertificate(String verificationCode) {
-        return certificateRepo.findByVerificationCode(verificationCode);
+    public Certificate getCertificate(Long id) {
+        return certificateRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Certificate getByVerificationCode(String code) {
+        return certificateRepository.findByVerificationCode(code);
+    }
+
+    @Override
+    public List<Certificate> getCertificatesByStudent(Long studentId) {
+        Student student = studentRepository.findById(studentId).orElse(null);
+        return certificateRepository.findByStudent(student);
     }
 }
