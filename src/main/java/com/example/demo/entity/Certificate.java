@@ -10,49 +10,42 @@ public class Certificate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private User user;  
+    private Student student;
+    private CertificateTemplate template;
 
     private LocalDate issuedDate;
+
+    @Column(unique = true)
     private String verificationCode;
+
     private String qrCodeUrl;
 
-    public Certificate() {
-    }
+    public Certificate() {}
 
-    public Long getId() {
-        return id;
-    }
-
-    public User getUser() {          
-        return user;
-    }
-
-    public void setUser(User user) { 
-        this.user = user;
-    }
-
-    public LocalDate getIssuedDate() {
-        return issuedDate;
-    }
-
-    public void setIssuedDate(LocalDate issuedDate) {
+    public Certificate(Student student, CertificateTemplate template,
+                       LocalDate issuedDate, String verificationCode, String qrCodeUrl) {
+        this.student = student;
+        this.template = template;
         this.issuedDate = issuedDate;
-    }
-
-    public String getVerificationCode() {
-        return verificationCode;
-    }
-
-    public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
-    }
-
-    public String getQrCodeUrl() {
-        return qrCodeUrl;
-    }
-
-    public void setQrCodeUrl(String qrCodeUrl) {
         this.qrCodeUrl = qrCodeUrl;
     }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Student getStudent() { return student; }
+    public void setStudent(Student student) { this.student = student; }
+
+    public CertificateTemplate getTemplate() { return template; }
+    public void setTemplate(CertificateTemplate template) { this.template = template; }
+
+    public LocalDate getIssuedDate() { return issuedDate; }
+    public void setIssuedDate(LocalDate issuedDate) { this.issuedDate = issuedDate; }
+
+    public String getVerificationCode() { return verificationCode; }
+    public void setVerificationCode(String verificationCode) { this.verificationCode = verificationCode; }
+
+    public String getQrCodeUrl() { return qrCodeUrl; }
+    public void setQrCodeUrl(String qrCodeUrl) { this.qrCodeUrl = qrCodeUrl; }
 }
