@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 @Entity
 public class User {
@@ -10,7 +11,7 @@ public class User {
     private Long id;
 
     private String name;
-
+    @Email
     @Column(unique = true)
     private String email;
 
