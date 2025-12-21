@@ -10,10 +10,14 @@ public class VerificationLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "certificate_id")
     private Certificate certificate;
 
     private LocalDateTime verifiedAt;
+
     private String status;
+
     private String ipAddress;
 
     public VerificationLog() {}
