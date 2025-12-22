@@ -14,7 +14,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register")                  
     public User register(@RequestBody User user) {
         return userService.register(user);
     }
