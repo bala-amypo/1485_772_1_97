@@ -30,11 +30,6 @@ public class CertificateController {
         return certificateService.getCertificate(id);
     }
 
-    @GetMapping("/student/{studentId}")
-    public List<Certificate> getByStudent(@PathVariable Long studentId) {
-        return certificateService.findByStudentId(studentId);
-    }
-
     @GetMapping("/verify/{code}")
     public Certificate verify(@PathVariable String code) {
         return certificateService.findByVerificationCode(code);
