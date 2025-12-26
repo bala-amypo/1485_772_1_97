@@ -1,11 +1,11 @@
-package com.example.demo.service;
-
-import java.util.List;
-
-import org.springframework.stereotype.Service;
+package com.example.demo.service.impl;
 
 import com.example.demo.entity.CertificateTemplate;
 import com.example.demo.repository.CertificateTemplateRepository;
+import com.example.demo.service.TemplateService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TemplateServiceImpl implements TemplateService {
@@ -18,6 +18,11 @@ public class TemplateServiceImpl implements TemplateService {
 
     @Override
     public CertificateTemplate addTemplate(CertificateTemplate template) {
+        templateRepository.findByTemplateName(template.getTemplateName())
+                .ifPresent(t -> {
+                    throw new RuntimeException("Template name exists");
+                });
+
         return templateRepository.save(template);
     }
 
@@ -27,7 +32,8 @@ public class TemplateServiceImpl implements TemplateService {
     }
 
     @Override
-    public CertificateTemplate getTemplateById(Long id) {
-        return templateRepository.findById(id).orElse(null);
+    public CertificateTemplate findById(Long id) {
+        return templateRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Template not found"));
     }
 }

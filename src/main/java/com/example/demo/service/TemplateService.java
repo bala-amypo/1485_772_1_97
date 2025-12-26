@@ -1,10 +1,13 @@
 package com.example.demo.service;
 
-import java.util.List;
 import com.example.demo.entity.CertificateTemplate;
+import java.util.List;
 
 public interface TemplateService {
+
     CertificateTemplate addTemplate(CertificateTemplate template);
+
     List<CertificateTemplate> getAllTemplates();
-    CertificateTemplate getTemplateById(Long id);
+
+    CertificateTemplate findById(Long id);
 }
