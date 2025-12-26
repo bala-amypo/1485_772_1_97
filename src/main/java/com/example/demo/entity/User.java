@@ -5,10 +5,7 @@ import lombok.*;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Table(name = "users")
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class User {
 
     @Id
@@ -22,5 +19,5 @@ public class User {
 
     private String password;
 
-    private String role; 
+    private String role;
 }
