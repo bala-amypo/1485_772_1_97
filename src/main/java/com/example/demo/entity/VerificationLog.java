@@ -21,6 +21,6 @@ public class VerificationLog {
 
     private LocalDateTime verifiedAt;
 
-    private String status; // SUCCESS / FAILED
+    private String status; 
     private String ipAddress;
 }
