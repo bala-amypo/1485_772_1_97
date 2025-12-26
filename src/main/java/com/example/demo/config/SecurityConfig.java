@@ -1,4 +1,4 @@
-package com.example.demo.config;   // ✅ MUST MATCH FOLDER
+package com.example.demo.config;  
 
 import com.example.demo.security.JwtFilter;
 import org.springframework.context.annotation.Bean;
