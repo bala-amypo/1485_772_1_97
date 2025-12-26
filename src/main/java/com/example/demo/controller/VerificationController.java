@@ -16,8 +16,19 @@ public class VerificationController {
     }
 
     @GetMapping("/{code}")
-    public Certificate verifyCertificate(
+    public Certificate verifyByGet(
             @PathVariable String code,
+            @RequestHeader(value = "X-FORWARDED-FOR", required = false) String ip) {
+
+        if (ip == null) {
+            ip = "127.0.0.1";
+        }
+        return verificationService.verify(code, ip);
+    }
+
+    @PostMapping
+    public Certificate verifyByPost(
+            @RequestParam String code,
             @RequestHeader(value = "X-FORWARDED-FOR", required = false) String ip) {
 
         if (ip == null) {
