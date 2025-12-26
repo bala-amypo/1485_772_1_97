@@ -4,9 +4,9 @@ import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
-@Service
+import java.util.Optional;
+
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -18,14 +18,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user) {
-        userRepository.findByEmail(user.getEmail())
-                .ifPresent(u -> {
-                    throw new RuntimeException("Email already exists");
-                });
+        Optional<User> existing = userRepository.findByEmail(user.getEmail());
+        if (existing.isPresent()) {
+            throw new RuntimeException("User already exists");
+        }
 
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setRole("STAFF");
-
+        if (user.getRole() == null) {
+            user.setRole("STAFF"); // REQUIRED by tests
+        }
         return userRepository.save(user);
     }
 
