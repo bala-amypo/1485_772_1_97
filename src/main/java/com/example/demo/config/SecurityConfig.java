@@ -1,5 +1,6 @@
-package com.example.demo.config;
+package com.example.demo.config;   // ✅ MUST MATCH FOLDER
 
+import com.example.demo.security.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
 
-    private final JwtFilter jwtFilter;   // ✅ USE JwtFilter
+    private final JwtFilter jwtFilter;
 
     public SecurityConfig(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;

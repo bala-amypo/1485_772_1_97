@@ -2,19 +2,22 @@ package com.example.demo.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 
+@Component   // ✅ REQUIRED
 public class JwtUtil {
 
     private final Key key;
-    private final long expirationMs;
+    private final long expirationMs = 3600000L;
 
-    public JwtUtil(String secret, long expirationMs) {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
-        this.expirationMs = expirationMs;
+    public JwtUtil() {
+        this.key = Keys.hmacShaKeyFor(
+                "abcdefghijklmnopqrstuvwxyz0123456789ABCD".getBytes()
+        );
     }
 
     public String generateToken(Map<String, Object> claims, String subject) {
