@@ -3,6 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.entity.Certificate;
 import com.example.demo.service.VerificationService;
 
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/verify")
 public class VerificationController {
 
     private final VerificationService verificationService;
@@ -11,7 +15,14 @@ public class VerificationController {
         this.verificationService = verificationService;
     }
 
-    public Certificate verify(String code, String ipAddress) {
-        return verificationService.verify(code, ipAddress);
+    @GetMapping("/{code}")
+    public Certificate verifyCertificate(
+            @PathVariable String code,
+            @RequestHeader(value = "X-FORWARDED-FOR", required = false) String ip) {
+
+        if (ip == null) {
+            ip = "127.0.0.1";
+        }
+        return verificationService.verify(code, ip);
     }
 }

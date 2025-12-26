@@ -3,8 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.entity.Student;
 import com.example.demo.service.StudentService;
 
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
+@RestController
+@RequestMapping("/students")
 public class StudentController {
 
     private final StudentService studentService;
@@ -13,11 +17,18 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    public Student add(Student student) {
+    @PostMapping
+    public Student addStudent(@RequestBody Student student) {
         return studentService.addStudent(student);
     }
 
-    public List<Student> list() {
+    @GetMapping
+    public List<Student> getAllStudents() {
         return studentService.getAllStudents();
+    }
+
+    @GetMapping("/{id}")
+    public Student getStudent(@PathVariable Long id) {
+        return studentService.findById(id);
     }
 }

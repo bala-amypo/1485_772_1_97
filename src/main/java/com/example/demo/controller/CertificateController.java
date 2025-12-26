@@ -3,6 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.entity.Certificate;
 import com.example.demo.service.CertificateService;
 
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/certificates")
 public class CertificateController {
 
     private final CertificateService certificateService;
@@ -11,11 +17,26 @@ public class CertificateController {
         this.certificateService = certificateService;
     }
 
-    public Certificate generate(Long studentId, Long templateId) {
+    @PostMapping("/generate")
+    public Certificate generateCertificate(
+            @RequestParam Long studentId,
+            @RequestParam Long templateId) {
+
         return certificateService.generateCertificate(studentId, templateId);
     }
 
-    public Certificate get(Long id) {
+    @GetMapping("/{id}")
+    public Certificate getCertificate(@PathVariable Long id) {
         return certificateService.getCertificate(id);
+    }
+
+    @GetMapping("/student/{studentId}")
+    public List<Certificate> getByStudent(@PathVariable Long studentId) {
+        return certificateService.findByStudentId(studentId);
+    }
+
+    @GetMapping("/verify/{code}")
+    public Certificate verify(@PathVariable String code) {
+        return certificateService.findByVerificationCode(code);
     }
 }
