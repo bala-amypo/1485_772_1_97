@@ -5,9 +5,7 @@ import lombok.*;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class CertificateTemplate {
 
     @Id
@@ -18,6 +16,4 @@ public class CertificateTemplate {
     private String templateName;
 
     private String backgroundUrl;
-    private String fontStyle;
-    private String signatureName;
 }
