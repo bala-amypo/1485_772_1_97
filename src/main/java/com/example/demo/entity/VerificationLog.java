@@ -20,6 +20,6 @@ public class VerificationLog {
     private String verificationCode;
 
     private String ipAddress;
-
+    private String status;
     private LocalDateTime verifiedAt;
 }
