@@ -22,7 +22,6 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    // -------- Constructors --------
     public User() {}
 
     public User(Long id, String name, String email, String password, String role) {
@@ -33,7 +32,6 @@ public class User {
         this.role = role;
     }
 
-    // -------- Getters & Setters --------
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

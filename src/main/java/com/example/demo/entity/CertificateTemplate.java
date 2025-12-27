@@ -16,7 +16,6 @@ public class CertificateTemplate {
     @Column(nullable = false)
     private String backgroundUrl;
 
-    // -------- Constructors --------
     public CertificateTemplate() {}
 
     public CertificateTemplate(Long id, String templateName, String backgroundUrl) {
@@ -25,7 +24,6 @@ public class CertificateTemplate {
         this.backgroundUrl = backgroundUrl;
     }
 
-    // -------- Getters & Setters --------
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

@@ -19,7 +19,6 @@ public class VerificationLog {
 
     private LocalDateTime verifiedAt;
 
-    // -------- Constructors --------
     public VerificationLog() {}
 
     public VerificationLog(Long id, String verificationCode, String ipAddress,
@@ -31,7 +30,6 @@ public class VerificationLog {
         this.verifiedAt = verifiedAt;
     }
 
-    // -------- Getters & Setters --------
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

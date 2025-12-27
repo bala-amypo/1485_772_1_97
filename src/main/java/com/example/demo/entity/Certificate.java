@@ -19,17 +19,14 @@ public class Certificate {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String qrCodeUrl;
 
-    // Many certificates → One student
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    // Many certificates → One template
     @ManyToOne
     @JoinColumn(name = "template_id", nullable = false)
     private CertificateTemplate template;
 
-    // -------- Constructors --------
     public Certificate() {}
 
     public Certificate(Long id, String verificationCode, String qrCodeUrl,
@@ -41,7 +38,6 @@ public class Certificate {
         this.template = template;
     }
 
-    // -------- Getters & Setters --------
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
