@@ -26,18 +26,21 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
+    // ---------------- REGISTER ----------------
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
-        User user = User.builder()
-                .name(request.getName())
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .role(request.getRole())
-                .build();
 
-        return ResponseEntity.ok(userService.register(user));
+        User user = new User();
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        user.setRole(request.getRole());
+
+        User savedUser = userService.register(user);
+        return ResponseEntity.ok(savedUser);
     }
 
+    // ---------------- LOGIN ----------------
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
         try {
@@ -49,10 +52,11 @@ public class AuthController {
             claims.put("role", user.getRole());
 
             String token = jwtUtil.generateToken(claims, user.getEmail());
-            return ResponseEntity.ok(new AuthResponse(token));
 
+            return ResponseEntity.ok(new AuthResponse(token));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid credentials");
         }
     }
 }
