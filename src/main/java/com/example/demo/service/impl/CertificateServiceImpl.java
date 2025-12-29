@@ -30,7 +30,6 @@ public class CertificateServiceImpl implements CertificateService {
         this.templateRepository = templateRepository;
     }
 
-    // ---------------- GENERATE CERTIFICATE ----------------
     @Override
     public Certificate generateCertificate(Long studentId, Long templateId) {
 
@@ -52,21 +51,18 @@ public class CertificateServiceImpl implements CertificateService {
         return certificateRepository.save(certificate);
     }
 
-    // ---------------- GET CERTIFICATE ----------------
     @Override
     public Certificate getCertificate(Long id) {
         return certificateRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Certificate not found"));
     }
 
-    // ---------------- FIND BY VERIFICATION CODE ----------------
     @Override
     public Certificate findByVerificationCode(String code) {
         return certificateRepository.findByVerificationCode(code)
                 .orElseThrow(() -> new RuntimeException("Certificate not found"));
     }
 
-    // ---------------- FIND BY STUDENT ----------------
     @Override
     public List<Certificate> findByStudentId(Long studentId) {
 
