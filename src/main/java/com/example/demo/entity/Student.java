@@ -23,7 +23,6 @@ public class Student {
     @Column(nullable = false)
     private String rollNumber;
 
-    // -------- Constructors --------
     public Student() {}
 
     public Student(Long id, String name, String email, String rollNumber) {
@@ -33,7 +32,6 @@ public class Student {
         this.rollNumber = rollNumber;
     }
 
-    // -------- Getters & Setters --------
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
